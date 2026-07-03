@@ -2,6 +2,7 @@
     font-family: 'Cooper Hewitt';
     src: url('../fonts/CooperHewitt-Light.woff')format('woff'),
         url('../fonts/CooperHewitt-Thin.woff')format('woff');
+    font-display: swap;
 }
 
 :root {
@@ -20,8 +21,7 @@
 }
 
 html {
-    font-size: 100%;
-    /*62.5%*/
+    font-size: 62.5%;
     scrollbar-width: thin;
     scrollbar-color: var(--beaver) var(--eerie-black);
     scroll-behavior: smooth;
@@ -41,6 +41,11 @@ html::-webkit-scrollbar-thumb {
 
 ::selection {
     background-color: #776254;
+}
+
+/* Fix: evita que el header fijo tape el título de la sección al navegar por el menú */
+section[id] {
+    scroll-margin-top: 70px;
 }
 
 header {
@@ -97,20 +102,16 @@ header {
     height: 4px;
     width: 100%;
     background-color: var(--beaver);
-    /* Color de las líneas */
     border-radius: 2px;
     transition: all 0.3s ease;
-    /* Suaviza la animación */
 }
 
-/* Cuando el menú esté activo (ej. con JS) */
 .menu_icono.active .linea:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
 }
 
 .menu_icono.active .linea:nth-child(2) {
     opacity: 0;
-    /* Desaparece la línea central */
 }
 
 .menu_icono.active .linea:nth-child(3) {
@@ -127,7 +128,6 @@ header {
         background-color: transparent;
         cursor: pointer;
         color: var(--beaver);
-
     }
 
     .menu {
@@ -227,10 +227,9 @@ header {
     margin: 0 auto;
     text-align: start;
     position: relative;
-
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 4s steps(16) infinite;
+    animation: typing3 4s steps(16) infinite;
 }
 
 .txt4 {
@@ -243,24 +242,22 @@ header {
     margin: 0 auto;
     text-align: start;
     position: relative;
-
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 4s steps(32) infinite;
+    animation: typing4 4s steps(32) infinite;
 }
 
-@keyframes typing {
-    0% {
-        width: 0;
-    }
+/* Fix: cada texto anima hasta SU propio ancho (antes ambos usaban un 35ch fijo que no coincidía) */
+@keyframes typing3 {
+    0% { width: 0; }
+    50% { width: 16ch; }
+    100% { width: 0; }
+}
 
-    50% {
-        width: 35ch;
-    }
-
-    100% {
-        width: 0;
-    }
+@keyframes typing4 {
+    0% { width: 0; }
+    50% { width: 32ch; }
+    100% { width: 0; }
 }
 
 .txt5 {
@@ -283,6 +280,8 @@ header {
 }
 
 .cv_btn {
+    display: inline-block;
+    text-decoration: none;
     background-color: var(--beaver);
     border-radius: 3rem;
     padding: .6rem 2rem .5rem 2rem;
@@ -366,12 +365,14 @@ header {
     margin-bottom: 5rem;
     border-bottom: 2px solid var(--jet);
 }
-.container_sobre_mi{
+
+.container_sobre_mi {
     display: flex;
     flex-direction: column;
 }
+
 @media (min-width: 768px) {
-    .container_sobre_mi{
+    .container_sobre_mi {
         flex-direction: row-reverse;
         justify-content: space-around;
         padding: 0 5% 0 3rem;
@@ -394,13 +395,15 @@ header {
     padding: 6rem 0 5rem 0;
 }
 
+/* Fix: grid adaptable en vez de 2 columnas fijas siempre */
 .container_card_habilidades {
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 3rem;
     justify-content: center;
-    padding-bottom: 5rem;
+    padding: 0 3rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .card_habilidades {
@@ -412,7 +415,7 @@ header {
     justify-content: center;
     text-align: center;
     width: auto;
-    height: 14rem;
+    min-height: 14rem;
 }
 
 .card_habilidades img {
@@ -460,16 +463,18 @@ header {
     align-items: center;
     text-align: center;
     width: auto;
-    height: 33rem;
+    min-height: 33rem;
     margin: 0 1rem 2rem 1rem;
     padding: 1rem;
     justify-content: space-between;
-    ;
 }
 
+/* Fix: ancho fijo de 25rem desbordaba en mobile */
 .card_formacion img {
     margin-top: 1rem;
-    width: 25rem;
+    width: 100%;
+    max-width: 25rem;
+    height: auto;
 }
 
 .card_formacion span {
@@ -512,6 +517,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 3rem;
 }
 
 .card_proyectos {
@@ -593,7 +599,8 @@ header {
     margin-right: .8rem;
 }
 
-.container_btn_portafolio_card_proyectos .bnt_demo_portafolio:hover {
+/* Fix: el selector original (.bnt_demo_portafolio) no coincidía con ninguna clase real */
+.container_btn_portafolio_card_proyectos .bnt_demo:hover {
     background: #776254;
     box-shadow: 0px 13px 33px rgba(0, 0, 0, .75);
     transition: all .4s ease;
@@ -643,6 +650,14 @@ header {
     position: relative;
 }
 
+/* Fix: el padding de 3rem dejaba muy poco espacio útil en pantallas chicas */
+@media screen and (max-width: 500px) {
+    .container_contacto {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+}
+
 .container_text_contacto {
     width: 100%;
 }
@@ -672,11 +687,6 @@ header {
 
 .form_contacto input::placeholder {
     color: var(--light-grey);
-}
-
-.form_contacto .input-invalid {
-    border: 1px solid #574438;
-    color: #574438;
 }
 
 .form_contacto textarea {
@@ -784,7 +794,6 @@ footer {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    height: 1rem;
     height: 1rem;
     z-index: -1;
 }
