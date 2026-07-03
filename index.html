@@ -184,33 +184,42 @@ data-aos-duration="1100"
 
 <section id="formacion" class="formacion">
 <h1 data-aos="fade-up">Formación</h1>
-<div class="container_card_formacion">
-<div
-class="card_formacion"
-data-aos="fade-down"
-data-aos-duration="700"
->
+<div class="carousel_wrapper">
+<button class="carousel_arrow carousel_arrow_prev" data-target="formacion" aria-label="Formación anterior">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<div class="carousel_viewport" id="formacionViewport">
+<div class="carousel_track" id="formacionTrack">
+<div class="card_formacion">
+<div class="logo_wrap_formacion">
 <img src="./assets/images/logo_ucsm.png" alt="UCSM" loading="lazy" />
+</div>
 <span class="estudios_formacion">Ingenieria de Sistemas</span>
 <span class="tiempo_formacion">2011 - En curso</span>
 </div>
-<div
-class="card_formacion"
-data-aos="fade-down"
-data-aos-duration="700"
->
+<div class="card_formacion">
+<div class="logo_wrap_formacion">
 <img src="./assets/images/logo-one.png" alt="One" loading="lazy" />
-<span class="estudios_formacion"
->Oracle - Desarrollo Web BackEnd</span
->
+</div>
+<span class="estudios_formacion">Oracle - Desarrollo Web BackEnd</span>
 <span class="tiempo_formacion">2023</span>
 </div>
+</div>
+</div>
+<button class="carousel_arrow carousel_arrow_next" data-target="formacion" aria-label="Formación siguiente">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</button>
 </div>
 </section>
 
 <section id="proyectos" class="proyectos">
 <h1 data-aos="fade-up">Proyectos</h1>
-<div class="container_card_proyectos">
+<div class="carousel_wrapper">
+<button class="carousel_arrow carousel_arrow_prev" data-target="proyectos" aria-label="Proyecto anterior">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<div class="carousel_viewport" id="proyectosViewport">
+<div class="carousel_track" id="proyectosTrack">
 
 <div class="card_proyectos">
 <div class="portafolio_card_proyectos">
@@ -269,6 +278,11 @@ alt="Repo QR Studio"
 </div>
 
 </div>
+</div>
+<button class="carousel_arrow carousel_arrow_next" data-target="proyectos" aria-label="Proyecto siguiente">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</button>
+</div>
 </section>
 
 <section id="contacto" class="contacto">
@@ -312,11 +326,10 @@ AOS.init();
 <span>Copyright © | Coded by Joseph Supo</span>
 </div>
 </footer>
-<div class="container_btn_top show">
-<div class="btn_top">
-<a class="subir_inicio" href="#inicio">&#8595
-
-</a>
-</div>
-</div>
+<button type="button" class="btn_top" id="btnTop" aria-label="Volver al inicio">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"/>
+    <path d="M5 12l7-7 7 7"/>
+  </svg>
+</button>
 </html>
